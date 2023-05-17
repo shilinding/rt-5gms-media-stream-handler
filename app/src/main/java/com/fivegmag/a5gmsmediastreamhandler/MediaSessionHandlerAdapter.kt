@@ -219,6 +219,20 @@ class MediaSessionHandlerAdapter() {
         }
     }
 
+    fun reportConsumption() {
+        if (!bound) return
+        // Create and send a message to the service, using a supported 'what' value
+        val msg: Message = Message.obtain(null, SessionHandlerMessageTypes.CONSUMPTION_REPORTING_MESSAGE)
+        val bundle = Bundle()
+        bundle.putString("ConsumptionData", "This is Consumption Reporting testing Data by Shilin.")
+        msg.data = bundle
+        try {
+            mService?.send(msg)
+        } catch (e: RemoteException) {
+            e.printStackTrace()
+        }
+    }
+
     fun initializePlaybackByServiceListEntry(serviceListEntry: ServiceListEntry) {
         if (!bound) return
         // Create and send a message to the service, using a supported 'what' value

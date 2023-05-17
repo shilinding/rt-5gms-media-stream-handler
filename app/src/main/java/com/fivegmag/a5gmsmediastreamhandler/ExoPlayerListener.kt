@@ -27,6 +27,7 @@ class ExoPlayerListener(
     override fun onPlaybackStateChanged(playbackState: Int) {
         val state : String = mapStateToConstant(playbackState)
         mediaSessionHandlerAdapter.updatePlaybackState(state)
+        mediaSessionHandlerAdapter.reportConsumption()
     }
 
     override fun onIsPlayingChanged(isPlaying: Boolean) {
